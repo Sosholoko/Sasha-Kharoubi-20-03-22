@@ -21,6 +21,16 @@
   border: none;
   width: 100px;
   height: 50px;
-  background: rgb(64, 129, 214);
+  background: rgba(37, 138, 197, 0.384);
   color: white;
+}
+
+.dark-mode {
+  .nav_container .links button {
+    background: rgba(51, 51, 51, 0.473);
+    transition: background-color 0.2s ease-in;
+    border-radius: 10px;
+    border: 1px solid white;
+    color: white;
+  }
 }
