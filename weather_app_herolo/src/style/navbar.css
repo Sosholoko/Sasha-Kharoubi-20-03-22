@@ -1,0 +1,26 @@
+.nav_container {
+  display: flex;
+  justify-content: space-between;
+  background-color: transparent;
+  color: white;
+}
+
+.nav_container h1 {
+  margin-left: 20px;
+}
+
+.nav_container .links {
+  display: flex;
+  margin-right: 50px;
+  margin-top: 15px;
+}
+
+.nav_container .links button {
+  margin-left: 20px;
+  border-radius: 20px;
+  border: none;
+  width: 100px;
+  height: 50px;
+  background: rgb(64, 129, 214);
+  color: white;
+}

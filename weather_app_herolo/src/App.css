@@ -1,0 +1,9 @@
+body {
+  background: url(./pic/bgw.jpg);
+  backdrop-filter: blur(20px);
+  color: white;
+}
+
+.App {
+  text-align: center;
+}
