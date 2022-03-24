@@ -127,7 +127,7 @@ function Content(props) {
             <p className="city_text">{weatherSelector.weatherInfo.current.condition.text}</p>
           </div>
           <div className="fav">
-            <button className="fav_btn" onClick={() => favoriteCity(weatherSelector.weatherInfo.location.name)}>
+            <button className="fav_btn" onClick={() => favoriteCity(weatherSelector.weatherInfo)}>
               Add to Favorite <i class="fa-solid fa-heart"></i>
             </button>
           </div>
