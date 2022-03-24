@@ -19,6 +19,15 @@ function Navbar(props) {
   function togglePage() {
     setHome((prevState) => !prevState);
     setFav((prevState) => !prevState);
+    // const btnH = document.querySelector(".btn_home");
+    // const btnF = document.querySelector(".btn_fav");
+    // if (home) {
+    //   btnH.classList.add("home-mode");
+    //   btnF.classList.remove("fav-mode");
+    // } else {
+    //   btnF.classList.add("fav-mode");
+    //   btnH.classList.remove("home-mode");
+    // }
   }
   return (
     <Fragment>
@@ -27,10 +36,10 @@ function Navbar(props) {
           Herolo Weather App <i class="fa-solid fa-cloud-sun"></i>
         </h1>
         <div className="links">
-          <button onClick={togglePage}>
+          <button className="btn_home" onClick={togglePage}>
             <i class="fa-solid fa-house"></i> Home
           </button>
-          <button onClick={togglePage}>
+          <button className="btn_fav" onClick={togglePage}>
             <i class="fa-solid fa-heart-circle-check"></i> Favorites
           </button>
         </div>

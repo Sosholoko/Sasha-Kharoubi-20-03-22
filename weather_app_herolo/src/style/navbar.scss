@@ -26,12 +26,24 @@
   color: white;
 }
 
+.nav_container .links button:hover {
+  transition: background-color 0.2s ease-in;
+  background: rgba(255, 255, 255, 0.671);
+  color: rgb(0, 0, 0);
+}
+
 .dark-mode {
   .nav_container .links button {
     background: rgba(51, 51, 51, 0.473);
     transition: background-color 0.2s ease-in;
-    border-radius: 10px;
+    border-radius: 20px;
     border: 1px solid white;
     color: white;
+  }
+  .nav_container .links button:hover {
+    transition: background-color 0.2s ease-in;
+    background: rgba(255, 255, 255, 0.671);
+    color: rgb(0, 0, 0);
+    border: none;
   }
 }

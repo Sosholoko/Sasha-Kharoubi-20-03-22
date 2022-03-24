@@ -9,7 +9,7 @@ function Content(props) {
   const [input, setInput] = useState("");
   const [celsius, setCelsius] = useState(true);
   const [loading, setLoading] = useState(true);
-  //   const [selectedCity, setSelectedCity] = useState("");
+  const [selectedCity, setSelectedCity] = useState("");
 
   const weatherSelector = useSelector((state) => state);
 
@@ -73,10 +73,10 @@ function Content(props) {
 
   let arr = [];
 
-  const favoriteCity = () => {
+  const favoriteCity = (newCity) => {
     debugger;
-    let newCity = weatherSelector.weatherInfo.location.name;
     arr = [...arr, newCity];
+    setSelectedCity(arr);
 
     let timerInterval;
     Swal.fire({
@@ -123,7 +123,7 @@ function Content(props) {
             <p className="city_text">{weatherSelector.weatherInfo.current.condition.text}</p>
           </div>
           <div className="fav">
-            <button className="fav_btn" onClick={favoriteCity}>
+            <button className="fav_btn" onClick={() => favoriteCity(weatherSelector.weatherInfo.location.name)}>
               Add to Favorite <i class="fa-solid fa-heart"></i>
             </button>
           </div>
@@ -201,7 +201,7 @@ function Content(props) {
                   setCity(e.target.value);
                 }}
               ></input>
-              <input className="search_btn" type="submit" value="Check Weather " onClick={clearValue} />
+              <input className="search_btn" type="submit" value="Check Weather  →" onClick={clearValue} />
             </div>
           </form>
           {details}
@@ -210,7 +210,7 @@ function Content(props) {
       {props.fav && (
         <Fragment>
           <h1>Favorite Page</h1>
-          <p></p>
+          <p>{selectedCity}</p>
         </Fragment>
       )}
     </Fragment>

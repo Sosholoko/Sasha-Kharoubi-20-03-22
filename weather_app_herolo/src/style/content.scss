@@ -83,8 +83,16 @@
   padding: 5px;
   height: 40px;
   width: 120px;
-  background: rgb(187, 101, 101);
+  background: rgb(173, 87, 87);
   color: white;
+}
+
+.fav_btn:hover {
+  background: rgb(189, 52, 52);
+  transition: background-color 0.2s ease-in;
+  border: 1px solid rgb(189, 52, 52);
+  color: white;
+  box-shadow: -2px 5px 15px 5px #0000008a;
 }
 
 .weather_icon {
@@ -178,11 +186,23 @@
   height: 50px;
   width: 120px;
   border-radius: 10px;
-  border: 1px solid white;
+  // border: 1px solid white;
+  border: none;
   color: white;
-  background: rgba(18, 45, 136, 0.363);
+  background: rgba(52, 95, 238, 0.363);
   font-weight: bold;
   text-align: center;
+  animation: transorm 0.5s;
+  transition: 0.5s;
+}
+
+.search_btn:hover {
+  color: rgb(0, 46, 131);
+  background: rgb(255, 255, 255);
+  border: none;
+  transform: scale(1.05);
+  transition: 0.5s;
+  box-shadow: -2px 5px 15px 5px #0000008a;
 }
 
 .dark-mode {
