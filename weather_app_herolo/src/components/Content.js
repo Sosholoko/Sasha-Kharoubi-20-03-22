@@ -9,7 +9,7 @@ function Content(props) {
   const [input, setInput] = useState("");
   const [celsius, setCelsius] = useState(true);
   const [loading, setLoading] = useState(true);
-  const [selectedCity, setSelectedCity] = useState("");
+  const [selectedCity, setSelectedCity] = useState();
 
   const weatherSelector = useSelector((state) => state);
 
@@ -60,12 +60,11 @@ function Content(props) {
   const body = document.body;
 
   const toggleDegree = () => {
+    setCelsius((prevState) => !prevState);
     if (celsius === true) {
-      setCelsius((prevState) => !prevState);
       toggle.classList.add("toggle-active");
       body.classList.add("cel-mode");
     } else {
-      setCelsius((prevState) => !prevState);
       body.classList.remove("cel-mode");
       toggle.classList.remove("toggle-active");
     }

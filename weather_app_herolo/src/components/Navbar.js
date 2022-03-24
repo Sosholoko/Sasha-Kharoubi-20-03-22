@@ -7,7 +7,6 @@ function Navbar(props) {
   const [fav, setFav] = useState(false);
 
   useEffect(() => {
-    const body = document.body;
     const toggle = document.querySelector(".toggle-inner");
     if (props.dark === true) {
       body.classList.add("dark-mode");
@@ -16,18 +15,21 @@ function Navbar(props) {
     }
   }, [props.dark]);
 
+  const body = document.body;
+
   function togglePage() {
     setHome((prevState) => !prevState);
     setFav((prevState) => !prevState);
-    // const btnH = document.querySelector(".btn_home");
-    // const btnF = document.querySelector(".btn_fav");
-    // if (home) {
-    //   btnH.classList.add("home-mode");
-    //   btnF.classList.remove("fav-mode");
-    // } else {
-    //   btnF.classList.add("fav-mode");
-    //   btnH.classList.remove("home-mode");
-    // }
+    const btnH = document.querySelector(".btn_home");
+    const btnF = document.querySelector(".btn_fav");
+    const body = document.body;
+    if (home) {
+      body.classList.remove("home-mode");
+      body.classList.add("fav-mode");
+    } else {
+      body.classList.remove("fav-mode");
+      body.classList.add("home-mode");
+    }
   }
   return (
     <Fragment>

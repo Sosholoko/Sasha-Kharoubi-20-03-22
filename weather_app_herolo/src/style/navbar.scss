@@ -47,3 +47,27 @@
     border: none;
   }
 }
+
+.home-mode {
+  .nav_container .links .btn_home {
+    transition: background-color 0.2s ease-in;
+    background: rgba(255, 255, 255, 0.671);
+    color: rgb(0, 0, 0);
+    border: none;
+  }
+  .nav_container .links .btn_fav {
+    border: none;
+  }
+}
+
+.fav-mode {
+  .nav_container .links .btn_fav {
+    transition: background-color 0.2s ease-in;
+    background: rgba(255, 255, 255, 0.671);
+    color: rgb(0, 0, 0);
+    border: none;
+  }
+  .nav_container .links .btn_home {
+    border: none;
+  }
+}
