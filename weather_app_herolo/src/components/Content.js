@@ -2,6 +2,7 @@ import "../style/content.scss";
 import React, { Fragment, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchWeather } from "../actions/fetchWeather";
+import Favorites from "./Favorites";
 import Swal from "sweetalert2";
 
 function Content(props) {
@@ -9,7 +10,7 @@ function Content(props) {
   const [input, setInput] = useState("");
   const [celsius, setCelsius] = useState(true);
   const [loading, setLoading] = useState(true);
-  const [selectedCity, setSelectedCity] = useState();
+  const [selectedCity, setSelectedCity] = useState([]);
 
   const weatherSelector = useSelector((state) => state);
 
@@ -70,31 +71,35 @@ function Content(props) {
     }
   };
 
-  let arr = [];
-
   const favoriteCity = (newCity) => {
     debugger;
-    arr = [...arr, newCity];
-    setSelectedCity(arr);
-
-    let timerInterval;
-    Swal.fire({
-      title: "Added to Favorite ♡",
-      icon: "success",
-      html: "This location have been added to your favorite !",
-      timer: 1500,
-      timerProgressBar: true,
-      didOpen: () => {
-        timerInterval = setInterval(() => {}, 100);
-      },
-      willClose: () => {
-        clearInterval(timerInterval);
-      }
-    }).then((result) => {
-      if (result.dismiss === Swal.DismissReason.timer) {
-        console.log("I was closed by the timer");
-      }
-    });
+    if (!selectedCity.includes(newCity)) {
+      setSelectedCity((prevCity) => [...prevCity, newCity]);
+      let timerInterval;
+      Swal.fire({
+        title: "Added to Favorite ♡",
+        icon: "success",
+        html: "This location have been added to your favorite !",
+        timer: 1500,
+        timerProgressBar: true,
+        didOpen: () => {
+          timerInterval = setInterval(() => {}, 100);
+        },
+        willClose: () => {
+          clearInterval(timerInterval);
+        }
+      }).then((result) => {
+        if (result.dismiss === Swal.DismissReason.timer) {
+          console.log("I was closed by the timer");
+        }
+      });
+    } else {
+      Swal.fire({
+        icon: "warning",
+        title: "Oops...",
+        text: "This city is already in your favorites ! "
+      });
+    }
   };
 
   let details = "";
@@ -208,8 +213,7 @@ function Content(props) {
       )}
       {props.fav && (
         <Fragment>
-          <h1>Favorite Page</h1>
-          <p>{selectedCity}</p>
+          <Favorites favCity={selectedCity} home={props.home} />
         </Fragment>
       )}
     </Fragment>

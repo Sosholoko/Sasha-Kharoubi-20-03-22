@@ -1,0 +1,22 @@
+.fav_group {
+  display: flex;
+  flex-wrap: wrap;
+  // border: 1px solid black;
+  height: 500px;
+  width: 890px;
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.favCard {
+  // border: 1px solid black;
+  border-radius: 20px;
+  background-color: rgba(63, 97, 161, 0.486);
+  backdrop-filter: blur(20px);
+
+  height: 200px;
+  width: 200px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
