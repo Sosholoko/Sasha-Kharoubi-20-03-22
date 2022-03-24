@@ -1,7 +1,5 @@
 import "../style/fav.scss";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchWeather } from "../actions/fetchWeather";
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
 
 function Favorites(props) {
   const delFav = (e) => {

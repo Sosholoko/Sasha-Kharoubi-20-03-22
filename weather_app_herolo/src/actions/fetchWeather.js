@@ -7,11 +7,6 @@ export function fetchWeather(city) {
     fetch(`${API_HOST}${API_VERSION}/current.json?key=${API_KEY}&q=${city}&aqi=no/`, {
       method: "GET",
       mode: "cors",
-      //   headers: {
-      //     "Access-Control-Allow-Headers": "Content-Type",
-      //     "Access-Control-Allow-Origin": `${API_HOST}locations/${API_VERSION}/${city}?apikey=${API_KEY}/`,
-      //     "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
-      //   },
       credentials: "same-origin"
     })
       .then((res) => {

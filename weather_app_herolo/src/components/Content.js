@@ -22,7 +22,7 @@ function Content(props) {
     getWeatherInfoAction("Tel Aviv");
     setTimeout(() => {
       setLoading(false);
-    }, 2000);
+    }, 3000);
   }, []);
 
   useEffect(() => {
@@ -53,7 +53,6 @@ function Content(props) {
       getError();
     } else {
       getWeatherInfoAction(city);
-      console.log(weatherSelector.weatherInfo);
     }
   };
 
@@ -72,7 +71,6 @@ function Content(props) {
   };
 
   const favoriteCity = (newCity) => {
-    debugger;
     if (!selectedCity.includes(newCity)) {
       setSelectedCity((prevCity) => [...prevCity, newCity]);
       let timerInterval;
@@ -90,7 +88,6 @@ function Content(props) {
         }
       }).then((result) => {
         if (result.dismiss === Swal.DismissReason.timer) {
-          console.log("I was closed by the timer");
         }
       });
     } else {
