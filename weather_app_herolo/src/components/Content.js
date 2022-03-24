@@ -1,14 +1,14 @@
 import "../style/content.scss";
-
 import React, { Fragment, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-
 import { fetchWeather } from "../actions/fetchWeather";
+import Swal from "sweetalert2";
 
 function Content(props) {
   const [city, setCity] = useState("");
   const [input, setInput] = useState("");
   const [celsius, setCelsius] = useState(true);
+  const [loading, setLoading] = useState(true);
   //   const [selectedCity, setSelectedCity] = useState("");
 
   const weatherSelector = useSelector((state) => state);
@@ -17,7 +17,11 @@ function Content(props) {
   const getWeatherInfoAction = (city) => dispatch(fetchWeather(city));
 
   useEffect(() => {
+    setLoading(true);
     getWeatherInfoAction("Tel Aviv");
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
   }, []);
 
   useEffect(() => {
@@ -34,10 +38,18 @@ function Content(props) {
     setInput("");
   };
 
+  const getError = () => {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "No city to look for ! Try again"
+    });
+  };
+
   const getWeatherInfo = (e) => {
     e.preventDefault();
     if (city === "") {
-      console.log("Error, no city ");
+      getError();
     } else {
       getWeatherInfoAction(city);
       console.log(weatherSelector.weatherInfo);
@@ -65,6 +77,25 @@ function Content(props) {
     debugger;
     let newCity = weatherSelector.weatherInfo.location.name;
     arr = [...arr, newCity];
+
+    let timerInterval;
+    Swal.fire({
+      title: "Added to Favorite ♡",
+      icon: "success",
+      html: "This location have been added to your favorite !",
+      timer: 1500,
+      timerProgressBar: true,
+      didOpen: () => {
+        timerInterval = setInterval(() => {}, 100);
+      },
+      willClose: () => {
+        clearInterval(timerInterval);
+      }
+    }).then((result) => {
+      if (result.dismiss === Swal.DismissReason.timer) {
+        console.log("I was closed by the timer");
+      }
+    });
   };
 
   let details = "";
@@ -78,10 +109,8 @@ function Content(props) {
               {weatherSelector.weatherInfo.location.name}, {weatherSelector.weatherInfo.location.country}
             </p>
             <br />
-            {celsius === false && <p className="city_temp">{Math.round(weatherSelector.weatherInfo.current.temp_f * 10) / 10}c°</p>}
-            {celsius === true && <p className="city_temp">{Math.round(weatherSelector.weatherInfo.current.temp_c * 10) / 10}c°</p>}
-            <br />
-            <br />
+            {celsius === false && <p className="city_temp">{weatherSelector.weatherInfo.current.temp_f.toFixed(1)} F°</p>}
+            {celsius === true && <p className="city_temp">{weatherSelector.weatherInfo.current.temp_c.toFixed(1)}c°</p>}
             <div className="toggle_group">
               <p>C°/F°</p>
               <div id="toggle2" onClick={toggleDegree}>
@@ -104,45 +133,56 @@ function Content(props) {
         <div className="weather_forecast">
           <div className="card_1">
             <p>Monday</p>
-            {celsius === false && <p className="city_tempC">{Math.round(weatherSelector.weatherInfo.current.temp_f * 10) / 10 + 2}c°</p>}
-            {celsius === true && <p className="city_tempC">{Math.round(weatherSelector.weatherInfo.current.temp_c * 10) / 10 + 2}c°</p>}
+            {celsius === false && <p className="city_tempC">{(weatherSelector.weatherInfo.current.temp_f + 2).toFixed(1)} F°</p>}
+            {celsius === true && <p className="city_tempC">{(weatherSelector.weatherInfo.current.temp_c + 2).toFixed(1)}c°</p>}
             <img className="city_iconC" src="//cdn.weatherapi.com/weather/64x64/day/113.png" />
           </div>
           <div className="card_2">
             <p>Tuesday</p>
-            {celsius === false && <p className="city_tempC">{weatherSelector.weatherInfo.current.temp_f}c°</p>}
-            {celsius === true && <p className="city_tempC">{Math.round(weatherSelector.weatherInfo.current.temp_c * 10) / 10 - 3}c°</p>}
+            {celsius === false && <p className="city_tempC">{(weatherSelector.weatherInfo.current.temp_f - 3).toFixed(1)} F°</p>}
+            {celsius === true && <p className="city_tempC">{(weatherSelector.weatherInfo.current.temp_c - 3).toFixed(1)}c°</p>}
             <img className="city_iconC" src="//cdn.weatherapi.com/weather/64x64/day/122.png" />
           </div>
           <div className="card_3">
             <p>Wednesday</p>
-            {celsius === false && <p className="city_tempC">{Math.round(weatherSelector.weatherInfo.current.temp_f * 10) / 10 + 1}c°</p>}
-            {celsius === true && <p className="city_tempC">{Math.round(weatherSelector.weatherInfo.current.temp_c * 10) / 10 + 1}c°</p>}
+            {celsius === false && <p className="city_tempC">{(weatherSelector.weatherInfo.current.temp_f + 1).toFixed(1)} F°</p>}
+            {celsius === true && <p className="city_tempC">{(weatherSelector.weatherInfo.current.temp_c + 1).toFixed(1)}c°</p>}
             <img className="city_iconC" src="//cdn.weatherapi.com/weather/64x64/day/122.png" />
           </div>
           <div className="card_4">
             <p>Thursday</p>
-            {celsius === false && <p className="city_tempC">{Math.round(weatherSelector.weatherInfo.current.temp_f * 10) / 10 - 4}c°</p>}
-            {celsius === true && <p className="city_tempC">{Math.round(weatherSelector.weatherInfo.current.temp_c * 10) / 10 - 4}c°</p>}
+            {celsius === false && <p className="city_tempC">{(weatherSelector.weatherInfo.current.temp_f - 4).toFixed(1)} F°</p>}
+            {celsius === true && <p className="city_tempC">{(weatherSelector.weatherInfo.current.temp_c - 4).toFixed(1)}c°</p>}
             <img className="city_iconC" src="//cdn.weatherapi.com/weather/64x64/day/122.png" />
           </div>
           <div className="card_5">
             <p>Friday</p>
-            {celsius === false && <p className="city_tempC">{Math.round(weatherSelector.weatherInfo.current.temp_f * 10) / 10 + 3}c°</p>}
-            {celsius === true && <p className="city_tempC">{Math.round(weatherSelector.weatherInfo.current.temp_c * 10) / 10 + 3}c°</p>}
+            {celsius === false && <p className="city_tempC">{(weatherSelector.weatherInfo.current.temp_f + 3).toFixed(1)} F°</p>}
+            {celsius === true && <p className="city_tempC">{(weatherSelector.weatherInfo.current.temp_c + 3).toFixed(1)}c°</p>}
             <img className="city_iconC" src="//cdn.weatherapi.com/weather/64x64/day/176.png" />
           </div>
           <div className="card_6">
             <p>Saturday</p>
-            {celsius === false && <p className="city_tempC">{Math.round(weatherSelector.weatherInfo.current.temp_f * 10) / 10 - 1}c°</p>}
-            {celsius === true && <p className="city_tempC">{Math.round(weatherSelector.weatherInfo.current.temp_c * 10) / 10 - 1}c°</p>}
+            {celsius === false && <p className="city_tempC">{(weatherSelector.weatherInfo.current.temp_f - 1).toFixed(1)} F°</p>}
+            {celsius === true && <p className="city_tempC">{(weatherSelector.weatherInfo.current.temp_c - 1).toFixed(1)}c°</p>}
             <img className="city_iconC" src="//cdn.weatherapi.com/weather/64x64/day/113.png" />
           </div>
         </div>
       </div>
     );
-  } else {
-    details = <p>The city you looked for doesn't exist ! Please try something else</p>;
+  } else if (loading === false) {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "The city you searched for is invalid ! Please try something else",
+      confirmButtonColor: "rgb(209, 92, 92)"
+    }).then(function () {
+      setLoading(true);
+      getWeatherInfoAction("Tel Aviv");
+      setTimeout(() => {
+        setLoading(false);
+      }, 800);
+    });
   }
   return (
     <Fragment>

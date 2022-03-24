@@ -11,10 +11,8 @@ function Navbar(props) {
     const toggle = document.querySelector(".toggle-inner");
     if (props.dark === true) {
       body.classList.add("dark-mode");
-      // toggle.classList.add("toggle-active");
     } else {
       body.classList.remove("dark-mode");
-      // toggle.classList.remove("toggle-active");
     }
   }, [props.dark]);
 
@@ -25,7 +23,9 @@ function Navbar(props) {
   return (
     <Fragment>
       <div className="nav_container">
-        <h1>Herolo Weather App</h1>
+        <h1>
+          Herolo Weather App <i class="fa-solid fa-cloud-sun"></i>
+        </h1>
         <div className="links">
           <button onClick={togglePage}>
             <i class="fa-solid fa-house"></i> Home
