@@ -1,5 +1,5 @@
 const API_KEY = "e0e3b128ffe44055ac5113828222003";
-const API_HOST = "http://api.weatherapi.com/";
+const API_HOST = "https://api.weatherapi.com/";
 const API_VERSION = "v1";
 
 export function fetchWeather(city) {
